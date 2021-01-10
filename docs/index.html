@@ -59,8 +59,7 @@
 			// Add Lights.
 			scene.add(new THREE.HemisphereLight());
 
-			addShadowedLight(1, 1, 1, 0xffffff, 1.35);
-			addShadowedLight(0.5, 1, - 1, 0xffffff, 1);
+			addShadowedLight(3, 3, 3, 0xffffff, 1);
 
 			// Renderer
 			renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -80,7 +79,7 @@
 		}
 
 		function addModel(scene) {
-			const y = 1;
+			const y = 0.5;
 			const z = 0;
 			const scale = 0.0075;
 
@@ -158,17 +157,6 @@
 			scene.add(directionalLight);
 
 			directionalLight.castShadow = true;
-
-			const d = 1;
-			directionalLight.shadow.camera.left = - d;
-			directionalLight.shadow.camera.right = d;
-			directionalLight.shadow.camera.top = d;
-			directionalLight.shadow.camera.bottom = - d;
-
-			directionalLight.shadow.camera.near = 1;
-			directionalLight.shadow.camera.far = 4;
-
-			directionalLight.shadow.bias = - 0.002;
 		}
 
 		function onWindowResize() {
