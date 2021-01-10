@@ -16,22 +16,17 @@
 	</div>
 
 	<script type="module">
-
 		import * as THREE from './build/three.module.js';
-
 		import Stats from './jsm/libs/stats.module.js';
-
 		import { STLLoader } from './jsm/loaders/STLLoader.js';
 
 		let container, stats;
-
 		let camera, cameraTarget, scene, renderer;
 
 		init();
 		animate();
 
 		function init() {
-
 			container = document.createElement('div');
 			document.body.appendChild(container);
 
@@ -129,7 +124,6 @@
 				mesh.receiveShadow = true;
 
 				scene.add(mesh);
-
 			});
 
 
@@ -174,7 +168,6 @@
 			directionalLight.shadow.camera.far = 4;
 
 			directionalLight.shadow.bias = - 0.002;
-
 		}
 
 		function onWindowResize() {
@@ -182,7 +175,6 @@
 			camera.updateProjectionMatrix();
 
 			renderer.setSize(window.innerWidth, window.innerHeight);
-
 		}
 
 		function animate() {
@@ -190,7 +182,6 @@
 
 			render();
 			stats.update();
-
 		}
 
 		function render() {
@@ -202,7 +193,6 @@
 			camera.lookAt(cameraTarget);
 
 			renderer.render(scene, camera);
-
 		}
 
 	</script>
