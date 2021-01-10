@@ -45,7 +45,6 @@
 			scene.fog = new THREE.Fog(0x72645b, 2, 15);
 
 			// Ground
-
 			const plane = new THREE.Mesh(
 				new THREE.PlaneBufferGeometry(40, 40),
 				new THREE.MeshPhongMaterial({ color: 0x999999, specular: 0x101010 })
@@ -58,7 +57,6 @@
 
 
 			// ASCII file
-
 			const loader = new STLLoader();
 			loader.load('./models/stl/ascii/slotted_disk.stl', function (geometry) {
 
@@ -78,7 +76,6 @@
 
 
 			// Binary files
-
 			const material = new THREE.MeshPhongMaterial({ color: 0xAAAAAA, specular: 0x111111, shininess: 200 });
 
 			loader.load('./models/stl/binary/pr2_head_pan.stl', function (geometry) {
@@ -137,13 +134,12 @@
 
 
 			// Lights
-
 			scene.add(new THREE.HemisphereLight(0x443333, 0x111122));
 
 			addShadowedLight(1, 1, 1, 0xffffff, 1.35);
 			addShadowedLight(0.5, 1, - 1, 0xffaa00, 1);
-			// renderer
 
+			// Renderer
 			renderer = new THREE.WebGLRenderer({ antialias: true });
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
@@ -153,19 +149,15 @@
 
 			container.appendChild(renderer.domElement);
 
-			// stats
-
+			// Stats
 			stats = new Stats();
 			container.appendChild(stats.dom);
 
-			//
-
+			// EvnetListner
 			window.addEventListener('resize', onWindowResize, false);
-
 		}
 
 		function addShadowedLight(x, y, z, color, intensity) {
-
 			const directionalLight = new THREE.DirectionalLight(color, intensity);
 			directionalLight.position.set(x, y, z);
 			scene.add(directionalLight);
@@ -186,7 +178,6 @@
 		}
 
 		function onWindowResize() {
-
 			camera.aspect = window.innerWidth / window.innerHeight;
 			camera.updateProjectionMatrix();
 
@@ -195,7 +186,6 @@
 		}
 
 		function animate() {
-
 			requestAnimationFrame(animate);
 
 			render();
@@ -204,7 +194,6 @@
 		}
 
 		function render() {
-
 			const timer = Date.now() * 0.0005;
 
 			camera.position.x = Math.cos(timer) * 3;
