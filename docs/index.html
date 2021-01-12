@@ -46,19 +46,15 @@
 				new THREE.PlaneBufferGeometry(40, 40),
 				new THREE.MeshPhongMaterial()
 			);
-			plane.rotation.x = - Math.PI / 2;
-			plane.position.y = 0;
-			scene.add(plane);
-
+			plane.rotation.set(- Math.PI / 2, 0, 0);
 			plane.receiveShadow = true;
-
+			scene.add(plane);
 
 			// Add Model.
 			addModel(scene);
 
 			// Add Lights.
 			scene.add(new THREE.HemisphereLight());
-
 			addShadowedLight(3, 3, 3, 0xffffff, 1);
 
 			// Renderer
@@ -177,7 +173,7 @@
 			const timer = Date.now() * 0.0001;
 			const length = 10;
 
-			camera.position.set(0, 1, 10);
+			camera.position.set(0, 0, 10);
 
 			// camera.position.x = Math.cos(timer) * length;
 			// camera.position.y = 2;
