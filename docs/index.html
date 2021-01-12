@@ -23,8 +23,9 @@
 		let container, stats;
 		let camera, cameraTarget, scene, renderer;
 
+		var page = 1;
 		init();
-		animate();
+		animate(page);
 
 		function init() {
 			container = document.createElement('div');
@@ -75,7 +76,7 @@
 		}
 
 		function addModel(scene) {
-			const y = 0.5;
+			const y = 0;
 			const z = 0;
 			const scale = 0.0075;
 
