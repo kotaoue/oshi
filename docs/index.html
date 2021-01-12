@@ -23,9 +23,8 @@
 		let container, stats;
 		let camera, cameraTarget, scene, renderer;
 
-		var page = 1;
 		init();
-		animate(page);
+		animate(2);
 
 		function init() {
 			container = document.createElement('div');
@@ -41,15 +40,6 @@
 			scene = new THREE.Scene();
 			scene.background = new THREE.Color(0xffffff);
 			scene.fog = new THREE.Fog(0x000000, 0, 20);
-
-			// Add Ground.
-			const plane = new THREE.Mesh(
-				new THREE.PlaneBufferGeometry(40, 40),
-				new THREE.MeshPhongMaterial()
-			);
-			plane.rotation.set(- Math.PI / 2, 0, 0);
-			plane.receiveShadow = true;
-			scene.add(plane);
 
 			// Add Model.
 			addModel(scene);
@@ -164,25 +154,46 @@
 		}
 
 		function animate(page) {
-			requestAnimationFrame(animate);
-			page1();
-
+			switch (page) {
+				case 1:
+					requestAnimationFrame(page1);
+					break;
+				case 2:
+					requestAnimationFrame(page2);
+					break;
+				case 3:
+					requestAnimationFrame(page3);
+					break;
+			}
 			stats.update();
 		}
 
 		function page1() {
+			camera.position.set(0, 0, 10);
+			camera.lookAt(cameraTarget);
+			renderer.render(scene, camera);
+			animate(1);
+		}
+
+		function page2() {
+			camera.position.set(0, 2, 10);
+			camera.lookAt(cameraTarget);
+			renderer.render(scene, camera);
+			animate(2);
+		}
+
+		function page3() {
 			const timer = Date.now() * 0.0001;
 			const length = 10;
 
-			camera.position.set(0, 0, 10);
-
-			// camera.position.x = Math.cos(timer) * length;
-			// camera.position.y = 2;
-			// camera.position.z = Math.sin(timer) * length;
+			camera.position.x = Math.cos(timer) * length;
+			camera.position.y = 2;
+			camera.position.z = Math.sin(timer) * length;
 
 			camera.lookAt(cameraTarget);
 
 			renderer.render(scene, camera);
+			animate(3);
 		}
 
 	</script>
