@@ -163,14 +163,14 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 		}
 
-		function animate() {
+		function animate(page) {
 			requestAnimationFrame(animate);
+			page1();
 
-			render();
 			stats.update();
 		}
 
-		function render() {
+		function page1() {
 			const timer = Date.now() * 0.0001;
 			const length = 10;
 
