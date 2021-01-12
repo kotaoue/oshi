@@ -23,8 +23,10 @@
 		let container, stats;
 		let camera, cameraTarget, scene, renderer;
 
+		var page = 2;
+		var pageMax = 3;
 		init();
-		animate(2);
+		animate();
 
 		function init() {
 			container = document.createElement('div');
@@ -63,6 +65,7 @@
 
 			// Add EvnetListner.
 			window.addEventListener('resize', onWindowResize, false);
+			document.addEventListener('keydown', onKeyDown);
 		}
 
 		function addModel(scene) {
@@ -153,7 +156,17 @@
 			renderer.setSize(window.innerWidth, window.innerHeight);
 		}
 
-		function animate(page) {
+		function onKeyDown(event) {
+			if (event.keyCode === 74 && page > 1) {
+				page--;
+			}
+			if (event.keyCode === 75 && page < pageMax) {
+				page++;
+			}
+		}
+
+
+		function animate() {
 			switch (page) {
 				case 1:
 					requestAnimationFrame(page1);
@@ -172,14 +185,14 @@
 			camera.position.set(0, 0, 10);
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
-			animate(1);
+			animate();
 		}
 
 		function page2() {
 			camera.position.set(0, 2, 10);
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
-			animate(2);
+			animate();
 		}
 
 		function page3() {
@@ -193,7 +206,7 @@
 			camera.lookAt(cameraTarget);
 
 			renderer.render(scene, camera);
-			animate(3);
+			animate();
 		}
 
 	</script>
