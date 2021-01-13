@@ -1,6 +1,10 @@
 # oshi
 🐓 The document of presentation about oshi. 🐓
 
+# Cards
+* [稲妻](https://mtg-jp.com/products/card-gallery/0000050/397722/)
+* [浅瀬蟲](https://mtg-jp.com/products/card-gallery/0000012/389652/)
+
 ## Fonts
 * [Sawarabi Mincho](https://fonts.google.com/specimen/Sawarabi+Mincho)
 
