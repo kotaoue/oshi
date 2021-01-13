@@ -11,12 +11,7 @@
 </head>
 
 <body>
-	<div id="info">
-		<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> -
-		STL loader test by <a href="https://github.com/aleeper" target="_blank" rel="noopener">aleeper</a>.<br />
-		PR2 head from <a href="http://www.ros.org/wiki/pr2_description">www.ros.org</a>
-	</div>
-
+	<div id="slide"></div>
 	<script type="module">
 		import * as THREE from './build/three.module.js';
 		import Stats from './jsm/libs/stats.module.js';
@@ -26,9 +21,10 @@
 		let camera, cameraTarget, scene, renderer;
 
 		var page = 2;
-		var pageMax = 3;
+		var pageMax = 5;
 		init();
 		animate();
+		slides();
 
 		function init() {
 			container = document.createElement('div');
@@ -165,6 +161,9 @@
 			if (event.keyCode === 75 && page < pageMax) {
 				page++;
 			}
+
+			// ページ切り替え
+			slides();
 		}
 
 
@@ -210,6 +209,27 @@
 			renderer.render(scene, camera);
 			animate();
 		}
+
+		function slides() {
+			switch (page) {
+				case 1:
+					document.getElementById("slide").innerHTML = "<p class='text'>美しい と 推し</p>";
+					break;
+				case 2:
+					document.getElementById("slide").innerHTML = "<p class='text'>稲妻</p>";
+					break;
+				case 3:
+					document.getElementById("slide").innerHTML = "<img class='image' src='images/lightningbolt.png' />";
+					break;
+				case 4:
+					document.getElementById("slide").innerHTML = "<p class='text'>浅瀬蟲</p>";
+					break;
+				case 5:
+					document.getElementById("slide").innerHTML = "<img class='image' src='images/reefworm.png' />";
+					break;
+			}
+		}
+
 
 	</script>
 </body>
