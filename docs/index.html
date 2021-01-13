@@ -20,8 +20,12 @@
 		let container, stats;
 		let camera, cameraTarget, scene, renderer;
 
-		var page = 1;
-		var pageMax = 5;
+		let startPos;
+		let paging = false;
+		let page = 1;
+		let pageMax = 5;
+		let moveRatio = 0;
+
 		init();
 		animate();
 		slides();
@@ -34,6 +38,8 @@
 			// Add Camera.
 			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
 			cameraTarget = new THREE.Vector3(0, 0, 0);
+			camera.position.set(0, 0, 10);
+			startPos = camera.position;
 
 			// Add Scene.
 			scene = new THREE.Scene();
@@ -163,6 +169,9 @@
 			}
 
 			// ページ切り替え
+			startPos = camera.position;  //開始位置
+			paging = true;
+			moveRatio = 0;
 			slides();
 		}
 
@@ -175,26 +184,49 @@
 				case 2:
 					requestAnimationFrame(page2);
 					break;
-				default:
+				case 3:
 					requestAnimationFrame(page3);
+					break;
+				case 4:
+					requestAnimationFrame(page4);
+					break;
+				case 5:
+					requestAnimationFrame(page5);
+					break;
+				default:
+					requestAnimationFrame(page1);
 					break;
 			}
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
 			stats.update();
+
+			if (moveRatio <= 100) {
+				moveRatio++;
+			}
 		}
 
 		function page1() {
-			camera.position.set(0, 0, 10);
+			camera.position.copy(startPos.lerp(new THREE.Vector3(0, 0, 10), moveRatio * 0.02));
 			animate();
 		}
 
 		function page2() {
-			camera.position.set(0, 2, 10);
+			camera.position.copy(startPos.lerp(new THREE.Vector3(0, -0.2, 10.2), moveRatio * 0.02));
 			animate();
 		}
 
 		function page3() {
+			camera.position.copy(startPos.lerp(new THREE.Vector3(0, -0.2, 11), moveRatio * 0.02));
+			animate();
+		}
+
+		function page4() {
+			camera.position.copy(startPos.lerp(new THREE.Vector3(0, -0.2, 11), moveRatio * 0.02));
+			animate();
+		}
+
+		function page5() {
 			const timer = Date.now() * 0.0001;
 			const length = 10;
 
