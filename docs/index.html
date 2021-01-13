@@ -70,6 +70,7 @@
 			const z = 0;
 			const scale = 0.005;
 
+
 			const loader = new STLLoader();
 			loader.load('./models/MTG_red.stl', function (geometry) {
 				const material = new THREE.MeshPhongMaterial({ color: 0xd3202a, specular: 0xeb9f82 });
@@ -174,24 +175,22 @@
 				case 2:
 					requestAnimationFrame(page2);
 					break;
-				case 3:
+				default:
 					requestAnimationFrame(page3);
 					break;
 			}
+			camera.lookAt(cameraTarget);
+			renderer.render(scene, camera);
 			stats.update();
 		}
 
 		function page1() {
 			camera.position.set(0, 0, 10);
-			camera.lookAt(cameraTarget);
-			renderer.render(scene, camera);
 			animate();
 		}
 
 		function page2() {
 			camera.position.set(0, 2, 10);
-			camera.lookAt(cameraTarget);
-			renderer.render(scene, camera);
 			animate();
 		}
 
@@ -203,9 +202,6 @@
 			camera.position.y = 2;
 			camera.position.z = Math.sin(timer) * length;
 
-			camera.lookAt(cameraTarget);
-
-			renderer.render(scene, camera);
 			animate();
 		}
 
