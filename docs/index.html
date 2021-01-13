@@ -20,20 +20,19 @@
 		let container, stats;
 		let camera, cameraTarget, scene, renderer;
 
-		var page = 2;
+		var page = 1;
 		var pageMax = 5;
 		init();
 		animate();
 		slides();
 
 		function init() {
+			// Add Container.
 			container = document.createElement('div');
 			document.body.appendChild(container);
 
 			// Add Camera.
 			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
-			camera.position.set(0, 0, 0);
-
 			cameraTarget = new THREE.Vector3(0, 0, 0);
 
 			// Add Scene.
@@ -67,9 +66,9 @@
 		}
 
 		function addModel(scene) {
-			const y = 0;
+			const y = -2.5;
 			const z = 0;
-			const scale = 0.0075;
+			const scale = 0.005;
 
 			const loader = new STLLoader();
 			loader.load('./models/MTG_red.stl', function (geometry) {
