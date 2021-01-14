@@ -25,7 +25,6 @@
 		let page = 1;
 		let pageMax = 5;
 		let moveRatio = 0;
-		let cameraInitPos;
 
 		init();
 		animate();
@@ -40,7 +39,7 @@
 			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
 			cameraTarget = new THREE.Vector3(2, 0, 0);
 			camera.position.set(2, 0, 11);
-			cameraInitPos = startPos = camera.position;
+			startPos = camera.position;
 
 			// Add Scene.
 			scene = new THREE.Scene();
@@ -130,16 +129,12 @@
 
 		function animate() {
 			switch (page) {
-				case 2:
-				case 4:
-					requestAnimationFrame(pageTitlte);
-					break;
 				case 3:
 				case 5:
 					requestAnimationFrame(pageDetail);
 					break;
 				default:
-					requestAnimationFrame(pageBasic);
+					requestAnimationFrame(pageTitlte);
 					break;
 			}
 			camera.lookAt(cameraTarget);
@@ -149,11 +144,6 @@
 			if (moveRatio <= 100) {
 				moveRatio++;
 			}
-		}
-
-		function pageBasic() {
-			camera.position.copy(startPos.lerp(cameraInitPos, moveRatio * 0.02));
-			animate();
 		}
 
 		function pageTitlte() {
