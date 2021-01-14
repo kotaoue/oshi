@@ -24,6 +24,7 @@
 		let paging = false;
 		let page = 0;
 		let moveRatio = 0;
+		let rotation = { frame: 0, index: -1, correction: 0 };
 
 		let contents = [
 			{ content: '美しい と 推し' },
@@ -33,6 +34,8 @@
 			{ content: 'reefworm.png' },
 			{ content: 'https://github.com/kotaoue/oshi' },
 		];
+
+		let meshes = [];
 
 		const PAGE_TYPE_TEXT = 0;
 		const PAGE_TYPE_IMAGE = 1;
@@ -104,6 +107,7 @@
 					mesh.castShadow = true;
 					mesh.receiveShadow = true;
 
+					meshes[i] = mesh;
 					scene.add(mesh);
 				});
 			}
@@ -165,8 +169,37 @@
 
 		function pageDetail() {
 			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 9.4), moveRatio * 0.02));
+			meshRotation();
 			animate();
 		}
+
+		function meshRotation() {
+			const resetFrame = 360;
+			if (rotation.frame >= resetFrame) {
+				rotation.frame = 0;
+			}
+			if (rotation.frame == 0) {
+				rotation.index++;
+				if (rotation.index >= meshes.length) {
+					rotation.index = 0;
+					rotation.correction += 180;
+					if (rotation.correction >= 360) {
+						rotation.correction = 0;
+					}
+				}
+
+				rotation.y = true;
+			}
+
+			rotation.frame += 3;
+			if (rotation.frame <= 180) {
+				if (rotation.index in meshes) {
+					meshes[rotation.index].rotation.y = (rotation.frame + rotation.correction) * (Math.PI / 180);
+					console.log(meshes[rotation.index].rotation.y);
+				}
+			}
+		}
+
 
 		function slides() {
 			switch (pageType()) {
