@@ -72,73 +72,25 @@
 			const z = 0;
 			const scale = 0.005;
 
+			let stls = ['MTG_red.stl', 'MTG_blue.stl', 'MTG_green.stl', 'MTG_white.stl', 'MTG_black.stl'];
+			let colors = [0xd3202a, 0x0e68ab, 0x00733e, 0xf9faf4, 0x150b00];
+			let speculars = [0xeb9f82, 0xb3ceea, 0xc4d3ca, 0xf8e7b9, 0xa69f9d];
 
-			const loader = new STLLoader();
-			loader.load('./models/MTG_red.stl', function (geometry) {
-				const material = new THREE.MeshPhongMaterial({ color: 0xd3202a, specular: 0xeb9f82 });
-				const mesh = new THREE.Mesh(geometry, material);
+			for (let i = 0; i < stls.length; i++) {
+				const loader = new STLLoader();
+				loader.load('./models/' + stls[i], function (geometry) {
+					const material = new THREE.MeshPhongMaterial({ color: colors[i], specular: speculars[i] });
+					const mesh = new THREE.Mesh(geometry, material);
 
-				mesh.position.set(-2, y, z);
-				mesh.scale.set(scale, scale, scale);
+					mesh.position.set(i * 1, y, z);
+					mesh.scale.set(scale, scale, scale);
 
-				mesh.castShadow = true;
-				mesh.receiveShadow = true;
+					mesh.castShadow = true;
+					mesh.receiveShadow = true;
 
-				scene.add(mesh);
-			});
-
-			loader.load('./models/MTG_blue.stl', function (geometry) {
-				const material = new THREE.MeshPhongMaterial({ color: 0x0e68ab, specular: 0xb3ceea });
-				const mesh = new THREE.Mesh(geometry, material);
-
-				mesh.position.set(-1, y, z);
-				mesh.scale.set(scale, scale, scale);
-
-				mesh.castShadow = true;
-				mesh.receiveShadow = true;
-
-				scene.add(mesh);
-			});
-
-			loader.load('./models/MTG_green.stl', function (geometry) {
-				const material = new THREE.MeshPhongMaterial({ color: 0x00733e, specular: 0xc4d3ca });
-				const mesh = new THREE.Mesh(geometry, material);
-
-				mesh.position.set(0, y, z);
-				mesh.scale.set(scale, scale, scale);
-
-				mesh.castShadow = true;
-				mesh.receiveShadow = true;
-
-				scene.add(mesh);
-			});
-
-			loader.load('./models/MTG_white.stl', function (geometry) {
-				const material = new THREE.MeshPhongMaterial({ color: 0xf9faf4, specular: 0xf8e7b9 });
-				const mesh = new THREE.Mesh(geometry, material);
-
-				mesh.position.set(1, y, z);
-				mesh.scale.set(scale, scale, scale);
-
-				mesh.castShadow = true;
-				mesh.receiveShadow = true;
-
-				scene.add(mesh);
-			});
-
-			loader.load('./models/MTG_black.stl', function (geometry) {
-				const material = new THREE.MeshPhongMaterial({ color: 0x150b00, specular: 0xa69f9d });
-				const mesh = new THREE.Mesh(geometry, material);
-
-				mesh.position.set(2, y, z);
-				mesh.scale.set(scale, scale, scale);
-
-				mesh.castShadow = true;
-				mesh.receiveShadow = true;
-
-				scene.add(mesh);
-			});
-
+					scene.add(mesh);
+				});
+			}
 		}
 
 		function addShadowedLight(x, y, z, color, intensity) {
