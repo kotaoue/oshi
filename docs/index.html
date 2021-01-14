@@ -33,6 +33,9 @@
 			{ content: 'reefworm.png' },
 		];
 
+		const PAGE_TYPE_TEXT = 0;
+		const PAGE_TYPE_IMAGE = 1;
+
 		init();
 		animate();
 		slides();
@@ -138,14 +141,12 @@
 		}
 
 		function animate() {
-			switch (page) {
-				case 3:
-				case 5:
+			switch (pageType()) {
+				case PAGE_TYPE_IMAGE:
 					requestAnimationFrame(pageDetail);
 					break;
 				default:
 					requestAnimationFrame(pageTitlte);
-					break;
 			}
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
@@ -167,12 +168,20 @@
 		}
 
 		function slides() {
+			switch (pageType()) {
+				case PAGE_TYPE_IMAGE:
+					document.getElementById("slide").innerHTML = "<img class='image' src='images/" + contents[page].content + "' />";
+					break;
+				default:
+					document.getElementById("slide").innerHTML = "<p class='text'>" + contents[page].content + "</p>";
+			}
+		}
+
+		function pageType() {
 			if (contents[page].content.endsWith(".png")) {
-				document.getElementById("slide").innerHTML = "<img class='image' src='images/" + contents[page].content + "' />";
+				return PAGE_TYPE_IMAGE;
 			}
-			else {
-				document.getElementById("slide").innerHTML = "<p class='text'>" + contents[page].content + "</p>";
-			}
+			return PAGE_TYPE_TEXT;
 		}
 	</script>
 </body>
