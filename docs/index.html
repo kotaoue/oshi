@@ -32,6 +32,8 @@
 			{ content: 'lightningbolt.png' },
 			{ content: '推せる = 浅瀬蟲' },
 			{ content: 'reefworm.png' },
+			{ content: ['fish.png', 'whale.png', 'kraken.png'] },
+			{ content: 'reefworm.png' },
 			{ content: 'https://github.com/kotaoue/oshi' },
 		];
 
@@ -41,6 +43,7 @@
 		const PAGE_TYPE_TEXT = 0;
 		const PAGE_TYPE_IMAGE = 1;
 		const PAGE_TYPE_LINK = 2;
+		const PAGE_TYPE_ARRAY = 3;
 
 		init();
 		animate();
@@ -221,6 +224,15 @@
 
 		function slides() {
 			switch (pageType()) {
+				case PAGE_TYPE_ARRAY:
+					let innerHTML = "<p class='images'>";
+					for (let i = 0; i < contents[page].content.length; i++) {
+						console.log("aa");
+						innerHTML += "<img class='images' src='images/" + contents[page].content[i] + "' />";
+					}
+					innerHTML += "</p>";
+					document.getElementById("slide").innerHTML = innerHTML;
+					break;
 				case PAGE_TYPE_IMAGE:
 					document.getElementById("slide").innerHTML = "<img class='image' src='images/" + contents[page].content + "' />";
 					break;
@@ -233,6 +245,9 @@
 		}
 
 		function pageType() {
+			if (Array.isArray(contents[page].content)) {
+				return PAGE_TYPE_ARRAY;
+			}
 			if (contents[page].content.endsWith(".png")) {
 				return PAGE_TYPE_IMAGE;
 			}
