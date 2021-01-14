@@ -130,61 +130,39 @@
 
 		function animate() {
 			switch (page) {
-				case 1:
-					requestAnimationFrame(page1);
-					break;
 				case 2:
-					requestAnimationFrame(page2);
+				case 4:
+					requestAnimationFrame(pageTitlte);
 					break;
 				case 3:
-					requestAnimationFrame(page3);
-					break;
-				case 4:
-					requestAnimationFrame(page4);
-					break;
 				case 5:
-					requestAnimationFrame(page5);
+					requestAnimationFrame(pageDetail);
 					break;
 				default:
-					requestAnimationFrame(page1);
+					requestAnimationFrame(pageBasic);
 					break;
 			}
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
 
+			console.log(moveRatio);
 			if (moveRatio <= 100) {
 				moveRatio++;
 			}
 		}
 
-		function page1() {
+		function pageBasic() {
 			camera.position.copy(startPos.lerp(cameraInitPos, moveRatio * 0.02));
 			animate();
 		}
 
-		function page2() {
-			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 10.2), moveRatio * 0.02));
-			animate();
-		}
-
-		function page3() {
+		function pageTitlte() {
 			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 11), moveRatio * 0.02));
 			animate();
 		}
 
-		function page4() {
-			camera.position.copy(startPos.lerp(new THREE.Vector3(2, -0.2, 11), moveRatio * 0.02));
-			animate();
-		}
-
-		function page5() {
-			const timer = Date.now() * 0.0001;
-			const length = 10;
-
-			camera.position.x = Math.cos(timer) * length;
-			camera.position.y = 2;
-			camera.position.z = Math.sin(timer) * length;
-
+		function pageDetail() {
+			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 9.4), moveRatio * 0.02));
 			animate();
 		}
 
