@@ -40,3 +40,7 @@ body {
 	margin: auto;
 }
 
+#slide .link {
+	padding : 140px 0 0 0;
+	font-size: 60px;
+}

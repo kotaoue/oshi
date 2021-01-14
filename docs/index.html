@@ -31,10 +31,12 @@
 			{ content: 'lightningbolt.png' },
 			{ content: '浅瀬蟲' },
 			{ content: 'reefworm.png' },
+			{ content: 'https://github.com/kotaoue/oshi' },
 		];
 
 		const PAGE_TYPE_TEXT = 0;
 		const PAGE_TYPE_IMAGE = 1;
+		const PAGE_TYPE_LINK = 2;
 
 		init();
 		animate();
@@ -151,7 +153,6 @@
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
 
-			console.log(moveRatio);
 			if (moveRatio <= 100) {
 				moveRatio++;
 			}
@@ -172,6 +173,9 @@
 				case PAGE_TYPE_IMAGE:
 					document.getElementById("slide").innerHTML = "<img class='image' src='images/" + contents[page].content + "' />";
 					break;
+				case PAGE_TYPE_LINK:
+					document.getElementById("slide").innerHTML = "<p class='link'><a href='" + contents[page].content + "'>" + contents[page].content + "</a></p>";
+					break;
 				default:
 					document.getElementById("slide").innerHTML = "<p class='text'>" + contents[page].content + "</p>";
 			}
@@ -180,6 +184,9 @@
 		function pageType() {
 			if (contents[page].content.endsWith(".png")) {
 				return PAGE_TYPE_IMAGE;
+			}
+			if (contents[page].content.startsWith("https")) {
+				return PAGE_TYPE_LINK;
 			}
 			return PAGE_TYPE_TEXT;
 		}
