@@ -37,8 +37,8 @@
 
 			// Add Camera.
 			camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 15);
-			cameraTarget = new THREE.Vector3(0, 0, 0);
-			camera.position.set(0, 0, 10);
+			cameraTarget = new THREE.Vector3(2, 0, 0);
+			camera.position.set(2, 0, 11);
 			startPos = camera.position;
 
 			// Add Scene.
@@ -157,22 +157,22 @@
 		}
 
 		function page1() {
-			camera.position.copy(startPos.lerp(new THREE.Vector3(0, 0, 10), moveRatio * 0.02));
+			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 11), moveRatio * 0.02));
 			animate();
 		}
 
 		function page2() {
-			camera.position.copy(startPos.lerp(new THREE.Vector3(0, -0.2, 10.2), moveRatio * 0.02));
+			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 10.2), moveRatio * 0.02));
 			animate();
 		}
 
 		function page3() {
-			camera.position.copy(startPos.lerp(new THREE.Vector3(0, -0.2, 11), moveRatio * 0.02));
+			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 11), moveRatio * 0.02));
 			animate();
 		}
 
 		function page4() {
-			camera.position.copy(startPos.lerp(new THREE.Vector3(0, -0.2, 11), moveRatio * 0.02));
+			camera.position.copy(startPos.lerp(new THREE.Vector3(2, -0.2, 11), moveRatio * 0.02));
 			animate();
 		}
 
