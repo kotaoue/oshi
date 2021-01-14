@@ -135,7 +135,7 @@
 			if (event.keyCode === DOM_VK_K && page > 0) {
 				page--;
 			}
-			if (event.keyCode === DOM_VK_J && page < contents.length) {
+			if (event.keyCode === DOM_VK_J && page < contents.length - 1) {
 				page++;
 			}
 
@@ -149,6 +149,7 @@
 		function animate() {
 			switch (pageType()) {
 				case PAGE_TYPE_IMAGE:
+				case PAGE_TYPE_LINK:
 					requestAnimationFrame(pageDetail);
 					break;
 				default:
@@ -195,7 +196,6 @@
 			if (rotation.frame <= 180) {
 				if (rotation.index in meshes) {
 					meshes[rotation.index].rotation.y = (rotation.frame + rotation.correction) * (Math.PI / 180);
-					console.log(meshes[rotation.index].rotation.y);
 				}
 			}
 		}
