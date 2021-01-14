@@ -22,9 +22,16 @@
 
 		let startPos;
 		let paging = false;
-		let page = 1;
-		let pageMax = 5;
+		let page = 0;
 		let moveRatio = 0;
+
+		let contents = [
+			{ content: '美しい と 推し' },
+			{ content: '稲妻' },
+			{ content: 'lightningbolt.png' },
+			{ content: '浅瀬蟲' },
+			{ content: 'reefworm.png' },
+		];
 
 		init();
 		animate();
@@ -116,10 +123,10 @@
 			const DOM_VK_J = 74;
 			const DOM_VK_K = 75;
 
-			if (event.keyCode === DOM_VK_K && page > 1) {
+			if (event.keyCode === DOM_VK_K && page > 0) {
 				page--;
 			}
-			if (event.keyCode === DOM_VK_J && page < pageMax) {
+			if (event.keyCode === DOM_VK_J && page < contents.length) {
 				page++;
 			}
 
@@ -129,7 +136,6 @@
 			moveRatio = 0;
 			slides();
 		}
-
 
 		function animate() {
 			switch (page) {
@@ -161,26 +167,13 @@
 		}
 
 		function slides() {
-			switch (page) {
-				case 1:
-					document.getElementById("slide").innerHTML = "<p class='text'>美しい と 推し</p>";
-					break;
-				case 2:
-					document.getElementById("slide").innerHTML = "<p class='text'>稲妻</p>";
-					break;
-				case 3:
-					document.getElementById("slide").innerHTML = "<img class='image' src='images/lightningbolt.png' />";
-					break;
-				case 4:
-					document.getElementById("slide").innerHTML = "<p class='text'>浅瀬蟲</p>";
-					break;
-				case 5:
-					document.getElementById("slide").innerHTML = "<img class='image' src='images/reefworm.png' />";
-					break;
+			if (contents[page].content.endsWith(".png")) {
+				document.getElementById("slide").innerHTML = "<img class='image' src='images/" + contents[page].content + "' />";
+			}
+			else {
+				document.getElementById("slide").innerHTML = "<p class='text'>" + contents[page].content + "</p>";
 			}
 		}
-
-
 	</script>
 </body>
 
