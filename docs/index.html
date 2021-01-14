@@ -72,14 +72,18 @@
 			const z = 0;
 			const scale = 0.005;
 
-			let stls = ['MTG_red.stl', 'MTG_blue.stl', 'MTG_green.stl', 'MTG_white.stl', 'MTG_black.stl'];
-			let colors = [0xd3202a, 0x0e68ab, 0x00733e, 0xf9faf4, 0x150b00];
-			let speculars = [0xeb9f82, 0xb3ceea, 0xc4d3ca, 0xf8e7b9, 0xa69f9d];
+			let models = [
+				{ stl: 'MTG_red.stl', color: 0xd3202a, specular: 0xeb9f82 },
+				{ stl: 'MTG_blue.stl', color: 0x0e68ab, specular: 0xb3ceea },
+				{ stl: 'MTG_green.stl', color: 0x00733e, specular: 0xc4d3ca },
+				{ stl: 'MTG_white.stl', color: 0xf9faf4, specular: 0xf8e7b9 },
+				{ stl: 'MTG_black.stl', color: 0x150b00, specular: 0xa69f9d }
+			];
 
-			for (let i = 0; i < stls.length; i++) {
+			for (let i = 0; i < models.length; i++) {
 				const loader = new STLLoader();
-				loader.load('./models/' + stls[i], function (geometry) {
-					const material = new THREE.MeshPhongMaterial({ color: colors[i], specular: speculars[i] });
+				loader.load('./models/' + models[i].stl, function (geometry) {
+					const material = new THREE.MeshPhongMaterial({ color: models[i].color, specular: models[i].specular });
 					const mesh = new THREE.Mesh(geometry, material);
 
 					mesh.position.set(i * 1, y, z);
