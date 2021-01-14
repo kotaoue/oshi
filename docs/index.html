@@ -161,10 +161,13 @@
 		}
 
 		function onKeyDown(event) {
-			if (event.keyCode === 74 && page > 1) {
+			const DOM_VK_J = 74;
+			const DOM_VK_K = 75;
+
+			if (event.keyCode === DOM_VK_K && page > 1) {
 				page--;
 			}
-			if (event.keyCode === 75 && page < pageMax) {
+			if (event.keyCode === DOM_VK_J && page < pageMax) {
 				page++;
 			}
 
