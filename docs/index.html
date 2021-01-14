@@ -36,6 +36,7 @@
 		];
 
 		let meshes = [];
+		let startMeshes = [];
 
 		const PAGE_TYPE_TEXT = 0;
 		const PAGE_TYPE_IMAGE = 1;
@@ -88,11 +89,11 @@
 			const scale = 0.005;
 
 			let models = [
-				{ stl: 'MTG_red.stl', color: 0xd3202a, specular: 0xeb9f82 },
-				{ stl: 'MTG_blue.stl', color: 0x0e68ab, specular: 0xb3ceea },
-				{ stl: 'MTG_green.stl', color: 0x00733e, specular: 0xc4d3ca },
 				{ stl: 'MTG_white.stl', color: 0xf9faf4, specular: 0xf8e7b9 },
-				{ stl: 'MTG_black.stl', color: 0x150b00, specular: 0xa69f9d }
+				{ stl: 'MTG_blue.stl', color: 0x0e68ab, specular: 0xb3ceea },
+				{ stl: 'MTG_black.stl', color: 0x150b00, specular: 0xa69f9d },
+				{ stl: 'MTG_red.stl', color: 0xd3202a, specular: 0xeb9f82 },
+				{ stl: 'MTG_green.stl', color: 0x00733e, specular: 0xc4d3ca },
 			];
 
 			for (let i = 0; i < models.length; i++) {
@@ -111,6 +112,8 @@
 					scene.add(mesh);
 				});
 			}
+
+			startMeshes = meshes;
 		}
 
 		function addShadowedLight(x, y, z, color, intensity) {
@@ -149,11 +152,13 @@
 		function animate() {
 			switch (pageType()) {
 				case PAGE_TYPE_IMAGE:
-				case PAGE_TYPE_LINK:
 					requestAnimationFrame(pageDetail);
 					break;
+				case PAGE_TYPE_LINK:
+					requestAnimationFrame(pageLink);
+					break;
 				default:
-					requestAnimationFrame(pageTitlte);
+					requestAnimationFrame(pageTitle);
 			}
 			camera.lookAt(cameraTarget);
 			renderer.render(scene, camera);
@@ -163,7 +168,7 @@
 			}
 		}
 
-		function pageTitlte() {
+		function pageTitle() {
 			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 11), moveRatio * 0.02));
 			animate();
 		}
@@ -173,6 +178,19 @@
 			meshRotation();
 			animate();
 		}
+
+		function pageLink() {
+			camera.position.copy(startPos.lerp(new THREE.Vector3(2, 0, 9.4), moveRatio * 0.02));
+
+			meshes[0].position.copy(startMeshes[0].position.lerp(new THREE.Vector3(2, 1.75, 2), moveRatio * 0.02));
+			meshes[1].position.copy(startMeshes[1].position.lerp(new THREE.Vector3(5, 0.5, 2), moveRatio * 0.02));
+			meshes[2].position.copy(startMeshes[2].position.lerp(new THREE.Vector3(4, -2, 2), moveRatio * 0.02));
+			meshes[3].position.copy(startMeshes[3].position.lerp(new THREE.Vector3(0, -2, 2), moveRatio * 0.02));
+			meshes[4].position.copy(startMeshes[4].position.lerp(new THREE.Vector3(-1, 0.5, 2), moveRatio * 0.02));
+			meshRotation();
+			animate();
+		}
+
 
 		function meshRotation() {
 			const resetFrame = 360;
